@@ -1,0 +1,42 @@
+<div class="container">
+  <div  *ngIf="stakeDaoPoolState$ | async as stakeDaoPool" >
+    <div *ngIf="stakeDaoPool.token != '--' " class="row justify-content-around" (click)="loadInOut(stakeDaoPool)">
+      <!--div *ngFor="let stakeDaoPool of stakeDaoPool$" class="col-md-6 col-lg-4" [ngClass]="routeAnimationsElements"-->
+    <div class="col-md-4 col-lg-3 sizing" [ngClass]="routeAnimationsElements">
+      <mat-card class="h">
+        <mat-card-title>
+          {{stakeDaoPool.balance | bigIntFmt}}
+          <span class="token">{{stakeDaoPool.token}}</span>
+        </mat-card-title>
+        <mat-card-subtitle>
+          <p class="bold" >{{ info[0].title }}</p>
+          <p>{{stakeDaoPool.token+" "+info[0].desc }}</p>
+        </mat-card-subtitle>
+      </mat-card>
+    </div>
+    <div class="col-md-4 col-lg-3 sizing" [ngClass]="routeAnimationsElements">
+      <mat-card class="h">
+        <mat-card-title>
+          {{stakeDaoPool.totalSupply | bigIntFmt}}
+          <span class="token">{{stakeDaoPool.sdtoken}}</span>
+        </mat-card-title>
+        <mat-card-subtitle>
+          <p class="bold" >{{ info[1].title }}</p>
+          <p>{{ stakeDaoPool.sdtoken+" "+info[1].desc }}</p>
+        </mat-card-subtitle>
+      </mat-card>
+    </div>
+    <div class="col-md-4 col-lg-3 sizing" [ngClass]="routeAnimationsElements">
+      <mat-card class="h">
+        <mat-card-title>
+          {{stakeDaoPool.pricePerShare | bigIntFmt}}
+        </mat-card-title>
+        <mat-card-subtitle>
+          <p class="bold" >{{ info[2].title }}</p>
+          <p>{{ stakeDaoPool.balance | bigIntFmt }} = {{ stakeDaoPool.totalSupply | bigIntFmt }} * {{ stakeDaoPool.pricePerShare | bigIntFmt }} </p>
+        </mat-card-subtitle>
+      </mat-card>
+    </div>
+  </div>
+  </div>
+</div>

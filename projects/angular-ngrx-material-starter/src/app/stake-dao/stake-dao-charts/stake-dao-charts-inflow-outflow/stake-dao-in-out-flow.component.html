@@ -1,0 +1,21 @@
+<div class="container">
+  <!--div class="row" *ngIf="stakeDaoInOutState$ | async as inOutStake"-->
+  <div class="row justify-content-around" *ngIf="stakeDaoInOutState$ | async as stakeDaoInOut">
+    <mat-spinner *ngIf="stakeDaoInOut.loading; else displayChart"></mat-spinner>
+    <ng-template #displayChart>
+      {{data.title}}
+      <ngx-charts-line-chart #elchart [view]="chart.view" [scheme]="chart.scheme" [results]="stakeDaoInOut.result"
+        [gradient]="chart.gradient" [xAxis]="chart.showXAxis" [yAxis]="chart.showYAxis" [legend]="chart.showLegend"
+        [showXAxisLabel]="chart.showXAxisLabel" [showYAxisLabel]="chart.showYAxisLabel" [xAxisLabel]="chart.xAxisLabel"
+        [yAxisLabel]="chart.yAxisLabel" (select)="onSelect($event)">
+        <ng-template #seriesTooltipTemplate let-model="model">
+          <div class="card">
+              <p>In: {{model[0].value| currency}} / Out: {{model[1].value | currency}}</p>
+              <p>Difference: {{model[0].value - model[1].value | currency}}</p>
+              <p>Trx In :{{model[0].tooltip}} / Trx out :{{model[1].tooltip}}</p>
+          </div>     
+        </ng-template>
+      </ngx-charts-line-chart>
+    </ng-template>
+  </div>
+</div>

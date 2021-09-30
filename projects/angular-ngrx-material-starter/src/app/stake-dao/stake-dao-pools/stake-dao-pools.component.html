@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 rtl class="main-heading">{{ 'Pools' | translate }}</h2>
+    </div>
+
+    <div *ngFor="let stakeDaoPool of stakeDaoPoolsState$ | async">
+      <sdt-stake-dao-pool [pool-id]="stakeDaoPool.id" ></sdt-stake-dao-pool>
+    </div>
+
+
+</div>

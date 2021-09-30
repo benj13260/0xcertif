@@ -1,0 +1,11 @@
+@use '~@angular/material' as mat;
+
+$sdt-nature-primary: mat.define-palette(mat.$brown-palette, 700, 300, 900);
+$sdt-nature-accent: mat.define-palette(mat.$deep-purple-palette, 300);
+$sdt-nature-warn: mat.define-palette(mat.$red-palette, 600);
+
+$sdt-nature-theme: mat.define-light-theme(
+  $sdt-nature-primary,
+  $sdt-nature-accent,
+  $sdt-nature-warn
+);

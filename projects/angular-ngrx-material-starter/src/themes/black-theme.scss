@@ -1,0 +1,11 @@
+@use '~@angular/material' as mat;
+
+$sdt-black-primary: mat.define-palette(mat.$grey-palette, 700, 300, 900);
+$sdt-black-accent: mat.define-palette(mat.$blue-grey-palette, 400);
+$sdt-black-warn: mat.define-palette(mat.$red-palette, 500);
+
+$sdt-black-theme: mat.define-dark-theme(
+  $sdt-black-primary,
+  $sdt-black-accent,
+  $sdt-black-warn
+);
