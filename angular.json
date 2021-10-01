@@ -29,10 +29,10 @@
               "projects/angular-ngrx-material-starter/src/assets"
             ],
             "styles": [
-              "projects/angular-ngrx-material-starter/src/styles-app-loading.scss",
               "projects/angular-ngrx-material-starter/src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": ["ethers", "@ethersproject"]
           },
           "configurations": {
             "production": {
@@ -108,7 +108,6 @@
               "projects/angular-ngrx-material-starter/src/assets"
             ],
             "styles": [
-              "projects/angular-ngrx-material-starter/src/styles-app-loading.scss",
               "projects/angular-ngrx-material-starter/src/styles.scss"
             ],
             "scripts": []

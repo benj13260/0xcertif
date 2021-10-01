@@ -1,14 +1,14 @@
 import { createAction, props } from '@ngrx/store';
-import { StakeDaoInOutState, StakeDaoPoolState } from './stake-dao.types';
+import {
+  StakeDaoInOutState,
+  StakeDaoPoolInfo,
+  StakeDaoPoolState
+} from './stake-dao.types';
 
-export const loadMains = createAction(
-  '[Main] Load Mains'
-);
+export const loadMains = createAction('[Main] Load Mains');
 
 // Pools
-export const loadStakeDaoPools = createAction(
-  '[Main] Load stakeDaoPools'
-);
+export const loadStakeDaoPools = createAction('[Main] Load stakeDaoPools');
 
 export const loadStakeDaoPoolsSuccess = createAction(
   '[Main] Load stakeDaoPools Success',
@@ -23,12 +23,17 @@ export const loadStakeDaoPoolsFailure = createAction(
 // Pool
 export const loadStakeDaoPool = createAction(
   '[Main] Load stakeDaoPool',
-  props<{ poolId: number, contract : string }>()
+  props<{ pool: StakeDaoPoolState }>()
 );
 
 export const loadStakeDaoPoolSuccess = createAction(
   '[Main] Load stakeDaoPool Success',
-  props<{ poolId: number , data: StakeDaoPoolState }>()
+  props<{ poolId: number; data: StakeDaoPoolState }>()
+);
+
+export const removeStakeDaoPool = createAction(
+  '[Main] Remove stakeDaoPool',
+  props<{ poolId: number }>()
 );
 
 export const loadStakeDaoPoolFailure = createAction(
@@ -60,7 +65,7 @@ export const loadStakeDaoPoolInvSuccess = createAction(
 //InOut
 export const loadStakeDaoInOut = createAction(
   '[Main] Load StakeDaoInOut',
-  props<{ contract : string }>()
+  props<{ contract: string }>()
 );
 
 export const loadStakeDaoInOutSuccess = createAction(

@@ -11,6 +11,7 @@ export const AUTH_KEY = 'AUTH';
 
 @Injectable()
 export class AuthEffects {
+  /*
   login = createEffect(
     () =>
       this.actions$.pipe(
@@ -20,7 +21,7 @@ export class AuthEffects {
         )
       ),
     { dispatch: false }
-  );
+  );*/
 
   logout = createEffect(
     () =>

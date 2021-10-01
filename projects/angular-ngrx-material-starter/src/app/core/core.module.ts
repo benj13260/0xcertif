@@ -73,13 +73,13 @@ import {
   faMediumM,
   faTwitter,
   faInstagram,
-  faYoutube,
+  faYoutube
 } from '@fortawesome/free-brands-svg-icons';
 import { StakeDaoEffects } from './stake-dao/stake-dao.effects';
 import { BigIntFmtPipe } from './ethers/big-int-format.pipe';
 import { APOLLO_OPTIONS } from 'apollo-angular';
-import {HttpLink} from 'apollo-angular/http';
-import { bitQueryUrl,headersGQL } from './stake-dao/stake-dao-graph.services';
+import { HttpLink } from 'apollo-angular/http';
+import { bitQueryUrl, headersGQL } from './stake-dao/stake-dao-graph.services';
 import { InMemoryCache } from '@apollo/client/cache';
 import { ApolloLink } from '@apollo/client/core';
 
@@ -128,7 +128,6 @@ export function httpLoaderFactory(http: HttpClient) {
     MatSnackBarModule,
     MatButtonModule,
 
-
     // ngrx
     StoreModule.forRoot(reducers, { metaReducers }),
     StoreRouterConnectingModule.forRoot(),
@@ -161,10 +160,10 @@ export function httpLoaderFactory(http: HttpClient) {
     {
       provide: APOLLO_OPTIONS,
       useFactory(httpLink: HttpLink) {
-        const http = httpLink.create({uri: bitQueryUrl});
+        const http = httpLink.create({ uri: bitQueryUrl });
         const middleware = new ApolloLink((operation, forward) => {
           operation.setContext({
-            headers: headersGQL,
+            headers: headersGQL
           });
           return forward(operation);
         });
@@ -173,12 +172,11 @@ export function httpLoaderFactory(http: HttpClient) {
 
         return {
           link,
-          cache: new InMemoryCache(),
+          cache: new InMemoryCache()
         };
       },
-      deps: [HttpLink],
-    },
-
+      deps: [HttpLink]
+    }
   ],
   exports: [
     // angular
@@ -197,9 +195,8 @@ export function httpLoaderFactory(http: HttpClient) {
 
     // 3rd party
     FontAwesomeModule,
-    TranslateModule,
-  ],
-
+    TranslateModule
+  ]
 })
 export class CoreModule {
   constructor(
