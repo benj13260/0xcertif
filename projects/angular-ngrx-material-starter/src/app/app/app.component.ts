@@ -2,6 +2,7 @@ import browser from 'browser-detect';
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { faUser, faWifi } from '@fortawesome/free-solid-svg-icons';
 
 import { environment as env } from '../../environments/environment';
 
@@ -13,12 +14,16 @@ import {
   selectIsAuthenticated,
   selectSettingsStickyHeader,
   selectSettingsLanguage,
-  selectEffectiveTheme
+  selectEffectiveTheme,
+  selectAuth
 } from '../core/core.module';
 import {
   actionSettingsChangeAnimationsPageDisabled,
   actionSettingsChangeLanguage
 } from '../core/settings/settings.actions';
+import { AccountInfo, AuthState } from '../core/auth/auth.models';
+import { selectAuthState } from '../core/core.state';
+import { selectInfo } from '../core/auth/auth.selectors';
 
 @Component({
   selector: 'sdt-root',
@@ -35,7 +40,7 @@ export class AppComponent implements OnInit {
   languages = ['en', 'fr'];
   navigation = [
     //{ link: 'about', label: 'sdt.menu.about' },
-    { link: 'stake-dao', label: 'sdt.menu.stake-dao' },
+    { link: 'stake-dao', label: 'sdt.menu.stake-dao' }
     //{ link: 'feature-list', label: 'sdt.menu.features' },
   ];
   navigationSideMenu = [
@@ -43,7 +48,11 @@ export class AppComponent implements OnInit {
     { link: 'settings', label: 'sdt.menu.settings' }
   ];
 
+  faUser = faUser;
+  faWifi = faWifi;
+
   isAuthenticated$: Observable<boolean>;
+  accountInfo$: Observable<AccountInfo>;
   stickyHeader$: Observable<boolean>;
   language$: Observable<string>;
   theme$: Observable<string>;
@@ -66,6 +75,8 @@ export class AppComponent implements OnInit {
         })
       );
     }
+
+    this.accountInfo$ = this.store.pipe(select(selectInfo));
 
     this.isAuthenticated$ = this.store.pipe(select(selectIsAuthenticated));
     this.stickyHeader$ = this.store.pipe(select(selectSettingsStickyHeader));

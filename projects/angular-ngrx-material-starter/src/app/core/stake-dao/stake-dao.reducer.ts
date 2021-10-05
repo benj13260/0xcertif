@@ -1,19 +1,6 @@
-import { ValueTransformer } from '@angular/compiler/src/util';
-import {
-  Action,
-  ActionReducer,
-  createReducer,
-  MetaReducer,
-  on
-} from '@ngrx/store';
-import {
-  stakeDaoInOutStateInit,
-  stakeDaoPoolStateInit,
-  StakeDaoState
-} from './stake-dao.types';
+import { Action, createReducer, on } from '@ngrx/store';
+import { stakeDaoInOutStateInit, StakeDaoState } from './stake-dao.types';
 import * as MainActions from './stake-dao.actions';
-
-import { environment } from '../../../../src/environments/environment';
 
 export const mainFeatureKey = 'main';
 

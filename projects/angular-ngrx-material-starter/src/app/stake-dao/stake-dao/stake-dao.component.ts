@@ -1,7 +1,11 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { loadStakeDaoInOut, loadStakeDaoPools } from '../../core/stake-dao/stake-dao.actions';
-
+import { ethers } from 'ethers';
+import {
+  loadStakeDaoInOut,
+  loadStakeDaoPools
+} from '../../core/stake-dao/stake-dao.actions';
+import { StakeDaoServices } from '../../core/stake-dao/stake-dao.services';
 
 @Component({
   selector: 'sdt-stake-dao',
@@ -10,15 +14,11 @@ import { loadStakeDaoInOut, loadStakeDaoPools } from '../../core/stake-dao/stake
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StakeDaoComponent implements OnInit {
+  constructor(private store: Store, private s: StakeDaoServices) {}
 
+  ngOnInit() {}
 
-  constructor(private store: Store) {}
-
-  ngOnInit() {
+  update() {
+    // this.store.dispatch(loadStakeDaoInOut());
   }
-
-  update(){
-   // this.store.dispatch(loadStakeDaoInOut());
-  }
-
 }

@@ -76,12 +76,13 @@ import {
   faYoutube
 } from '@fortawesome/free-brands-svg-icons';
 import { StakeDaoEffects } from './stake-dao/stake-dao.effects';
-import { BigIntFmtPipe } from './ethers/big-int-format.pipe';
+
 import { APOLLO_OPTIONS } from 'apollo-angular';
 import { HttpLink } from 'apollo-angular/http';
 import { bitQueryUrl, headersGQL } from './stake-dao/stake-dao-graph.services';
 import { InMemoryCache } from '@apollo/client/cache';
 import { ApolloLink } from '@apollo/client/core';
+import { CustomFmtModule } from './ethers/custom-format.module';
 
 export {
   TitleService,
@@ -128,6 +129,7 @@ export function httpLoaderFactory(http: HttpClient) {
     MatSnackBarModule,
     MatButtonModule,
 
+    CustomFmtModule,
     // ngrx
     StoreModule.forRoot(reducers, { metaReducers }),
     StoreRouterConnectingModule.forRoot(),
@@ -192,6 +194,8 @@ export function httpLoaderFactory(http: HttpClient) {
     MatTooltipModule,
     MatSnackBarModule,
     MatButtonModule,
+
+    CustomFmtModule,
 
     // 3rd party
     FontAwesomeModule,
