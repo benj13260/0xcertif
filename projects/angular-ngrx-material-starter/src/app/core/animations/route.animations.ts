@@ -10,11 +10,13 @@ import {
 import { AnimationsService } from './animations.service';
 
 export const ROUTE_ANIMATIONS_ELEMENTS = 'route-animations-elements';
+export const ROUTE_ANIMATIONS_TITLE = 'route-animations-title';
 
 const STEPS_ALL: any[] = [
   query(':enter > *', style({ opacity: 0, position: 'fixed' }), {
     optional: true
   }),
+
   query(':enter .' + ROUTE_ANIMATIONS_ELEMENTS, style({ opacity: 0 }), {
     optional: true
   }),
@@ -24,7 +26,7 @@ const STEPS_ALL: any[] = [
       [
         style({ transform: 'translateY(0%)', opacity: 1 }),
         animate(
-          '0.2s ease-in-out',
+          '0.25s ease-in-out',
           style({ transform: 'translateY(-3%)', opacity: 0 })
         ),
         style({ position: 'fixed' })
@@ -47,6 +49,7 @@ const STEPS_ALL: any[] = [
       { optional: true }
     )
   ]),
+
   query(
     ':enter .' + ROUTE_ANIMATIONS_ELEMENTS,
     stagger(75, [
@@ -59,18 +62,47 @@ const STEPS_ALL: any[] = [
     { optional: true }
   )
 ];
+
+/*
 const STEPS_NONE = [];
 const STEPS_PAGE = [STEPS_ALL[0], STEPS_ALL[2]];
 const STEPS_ELEMENTS = [STEPS_ALL[1], STEPS_ALL[3]];
-
+*/
 export const routeAnimations = trigger('routeAnimations', [
-  transition(isRouteAnimationsAll, STEPS_ALL),
-  transition(isRouteAnimationsNone, STEPS_NONE),
+  transition(isRouteAnimationsAll, STEPS_ALL)
+  //transition("true", STEPS_ALL),
+  /*transition(isRouteAnimationsNone, STEPS_NONE),
   transition(isRouteAnimationsPage, STEPS_PAGE),
-  transition(isRouteAnimationsElements, STEPS_ELEMENTS)
+  transition(isRouteAnimationsElements, STEPS_ELEMENTS)*/
 ]);
 
+let i = 0;
+export function trig() {
+  console.log('hey');
+  i += 1;
+  trigger('@routeAnimations', [
+    transition('' + i, [
+      query(
+        ' @*',
+        stagger(75, [
+          style({ transform: 'translateY(10%)', opacity: 0 }),
+          animate(
+            '0.5s ease-in-out',
+            style({ transform: 'translateY(0%)', opacity: 1 })
+          )
+        ]),
+        { optional: true }
+      )
+    ])
+  ]);
+}
+
 export function isRouteAnimationsAll() {
+  console.log(
+    'isRouteAnimationsElements ' +
+      AnimationsService.isRouteAnimationsType('ALL')
+  );
+
   return AnimationsService.isRouteAnimationsType('ALL');
 }
 

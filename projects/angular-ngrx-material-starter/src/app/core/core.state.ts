@@ -13,23 +13,25 @@ import { AuthState } from './auth/auth.models';
 import { authReducer } from './auth/auth.reducer';
 import { RouterStateUrl } from './router/router.state';
 import { settingsReducer } from './settings/settings.reducer';
-import {stakeDaoReducer} from './stake-dao/stake-dao.reducer';
+import { stakeDaoReducer } from './stake-dao/stake-dao.reducer';
 
 import { SettingsState } from './settings/settings.model';
 import { StakeDaoState } from './stake-dao/stake-dao.types';
+import { bookReducers, BooksState } from '../arts/books/reducers';
 
 export interface AppState {
   auth: AuthState;
   settings: SettingsState;
-  stakeDao: StakeDaoState,
+  stakeDao: StakeDaoState;
+  books: BooksState;
   router: RouterReducerState<RouterStateUrl>;
 }
-
 
 export const reducers: ActionReducerMap<AppState> = {
   auth: authReducer,
   settings: settingsReducer,
   stakeDao: stakeDaoReducer,
+  books: bookReducers,
   router: routerReducer
 };
 
@@ -43,14 +45,26 @@ if (!environment.production) {
   }
 }
 
-export const selectAuthState =
-  createFeatureSelector<AppState, AuthState>('auth');
+export const selectAuthState = createFeatureSelector<AppState, AuthState>(
+  'auth'
+);
 
-export const selectSettingsState =
-  createFeatureSelector<AppState, SettingsState>('settings');
+export const selectSettingsState = createFeatureSelector<
+  AppState,
+  SettingsState
+>('settings');
 
-export const selectRouterState =
-  createFeatureSelector<AppState, RouterReducerState<RouterStateUrl>>('router');
+export const selectRouterState = createFeatureSelector<
+  AppState,
+  RouterReducerState<RouterStateUrl>
+>('router');
 
-export const selectStakeDAOState =
-  createFeatureSelector<AppState, RouterReducerState<RouterStateUrl>>('stakeDao');
+export const selectStakeDAOState = createFeatureSelector<
+  AppState,
+  RouterReducerState<RouterStateUrl>
+>('stakeDao');
+
+export const selectBooksState = createFeatureSelector<
+  AppState,
+  RouterReducerState<RouterStateUrl>
+>('books');

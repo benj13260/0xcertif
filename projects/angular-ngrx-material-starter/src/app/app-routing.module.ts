@@ -4,18 +4,23 @@ import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'stake-dao',
+    redirectTo: 'arts/find',
     pathMatch: 'full'
   },
   {
     path: 'about',
     loadChildren: () =>
       import('./features/about/about.module').then((m) => m.AboutModule)
-  },  
+  },
   {
     path: 'stake-dao',
     loadChildren: () =>
       import('./stake-dao/stake-dao.module').then((m) => m.StakeDaoModule)
+  },
+  {
+    path: 'arts',
+    loadChildren: () =>
+      import('./arts/books/books.module').then((m) => m.BooksModule)
   },
   /*
   {

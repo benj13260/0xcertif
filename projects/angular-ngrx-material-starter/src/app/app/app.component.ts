@@ -40,7 +40,9 @@ export class AppComponent implements OnInit {
   languages = ['en', 'fr'];
   navigation = [
     //{ link: 'about', label: 'sdt.menu.about' },
-    { link: 'stake-dao', label: 'sdt.menu.stake-dao' }
+    { link: 'stake-dao', label: 'sdt.menu.stake-dao' },
+    { link: 'arts/find', label: 'Arts' },
+    { link: 'arts/coll', label: 'Art' }
     //{ link: 'feature-list', label: 'sdt.menu.features' },
   ];
   navigationSideMenu = [
