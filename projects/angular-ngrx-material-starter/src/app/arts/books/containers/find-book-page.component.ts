@@ -55,7 +55,7 @@ export class FindBookPageComponent {
     this.books$ = store.select(fromBooks.selectAll); //selectSearchResults);
     this.loading$ = store.select(fromBooks.selectSearchLoading);
     this.error$ = store.select(fromBooks.selectSearchError);
-
+    this.search('a');
     setInterval(() => {
       this.numberOfTicks++;
       // require view to be updated

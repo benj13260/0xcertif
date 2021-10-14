@@ -4,7 +4,7 @@ import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'arts/find',
+    redirectTo: 'nfts',
     pathMatch: 'full'
   },
   {
@@ -18,10 +18,21 @@ const routes: Routes = [
       import('./stake-dao/stake-dao.module').then((m) => m.StakeDaoModule)
   },
   {
-    path: 'arts',
+    path: 'nfts',
+    loadChildren: () =>
+      import('./arts/certif/certifs.module').then((m) => m.CertifsModule)
+  },
+  {
+    path: 'galleries',
+    loadChildren: () =>
+      import('./arts/certif/certifs.module').then((m) => m.CertifsModule)
+  },
+  {
+    path: 'books',
     loadChildren: () =>
       import('./arts/books/books.module').then((m) => m.BooksModule)
   },
+
   /*
   {
     path: 'feature-list',

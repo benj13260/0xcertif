@@ -98,11 +98,6 @@ export function trig() {
 }
 
 export function isRouteAnimationsAll() {
-  console.log(
-    'isRouteAnimationsElements ' +
-      AnimationsService.isRouteAnimationsType('ALL')
-  );
-
   return AnimationsService.isRouteAnimationsType('ALL');
 }
 

@@ -1,0 +1,45 @@
+import { CdkScrollable, ScrollDispatcher } from '@angular/cdk/scrolling';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  Input,
+  NgZone
+} from '@angular/core';
+import { Store } from '@ngrx/store';
+import { interval, Observable } from 'rxjs';
+import { debounce } from 'rxjs/operators';
+import { Observer } from 'zen-observable-ts';
+import { Certif, Galleries, galleriesMock, Gallery } from '../certif';
+import { searchCertif } from '../certif.actions';
+import { RootCertifsState, selectAll, selectLoaded } from '../certif.reducer';
+
+@Component({
+  selector: 'x-gallery-preview-list',
+  template: `
+    <div>
+      <x-gallery-preview
+        *ngFor="let gallery of galleries"
+        [gallery]="gallery"
+      ></x-gallery-preview>
+    </div>
+  `,
+  styles: [
+    `
+      div {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    `
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class GalleryPreviewListComponent {
+  galleries: Gallery[];
+
+  constructor() {
+    let g = galleriesMock();
+    this.galleries = g.galleries;
+  }
+}

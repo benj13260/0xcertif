@@ -39,10 +39,13 @@ export class AppComponent implements OnInit {
   logo = '../../assets/logo.png';
   languages = ['en', 'fr'];
   navigation = [
-    //{ link: 'about', label: 'sdt.menu.about' },
-    { link: 'stake-dao', label: 'sdt.menu.stake-dao' },
-    { link: 'arts/find', label: 'Arts' },
-    { link: 'arts/coll', label: 'Art' }
+    { link: 'nfts', label: 'Arts' },
+    { link: 'galleries/list', label: 'Galleries' },
+    { link: 'books', label: 'Books' },
+    { link: 'about', label: 'sdt.menu.about' }
+    //{ link: 'stake-dao', label: 'sdt.menu.stake-dao' },
+
+    //{ link: 'arts/coll', label: 'Art' }
     //{ link: 'feature-list', label: 'sdt.menu.features' },
   ];
   navigationSideMenu = [
