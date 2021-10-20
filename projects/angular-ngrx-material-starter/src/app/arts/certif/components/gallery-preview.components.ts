@@ -19,7 +19,7 @@ import { Certif, Gallery } from '../certif';
   selector: 'x-gallery-preview',
   template: `
     <a
-      [routerLink]="['/arts/gallery', gallery.id]"
+      [routerLink]="['/nft/', contractAddr]"
       [@openClose]="OpenEmitter$ | async"
     >
       <mat-card class="example-card">
@@ -166,5 +166,9 @@ export class GalleryPreviewComponent implements OnInit {
   }
   get imageCover() {
     return this.gallery.volumeInfo.image.cover;
+  }
+
+  get contractAddr() {
+    return this.gallery.volumeInfo.contractAddr;
   }
 }

@@ -12,13 +12,13 @@
 
 @import './themes/default-theme';
 @import './themes/light-theme';
-@import './themes/black-theme';
-@import './themes/nature-theme';
+//@import './themes/black-theme';
+//@import './themes/nature-theme';
+@import './themes/art2rent-theme.scss';
 
 @import 'styles-reset.scss-theme';
 @import './app/app/app.component.scss-theme';
 @import './app/shared/big-input/big-input/big-input.component.scss-theme';
-
 
 @mixin custom-components-theme($theme) {
   @include sdt-styles-reset-theme($theme);
@@ -36,6 +36,7 @@
   @include custom-components-theme($sdt-light-theme);
 }
 
+/*
 .black-theme {
   @include mat.all-component-themes($sdt-black-theme);
   @include custom-components-theme($sdt-black-theme);
@@ -44,4 +45,10 @@
 .nature-theme {
   @include mat.all-component-themes($sdt-nature-theme);
   @include custom-components-theme($sdt-nature-theme);
+}
+*/
+
+.art2rent {
+  @include mat.all-component-themes($sdt-art2rent-theme);
+  @include custom-components-theme($sdt-art2rent-theme);
 }

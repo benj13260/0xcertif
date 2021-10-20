@@ -3,6 +3,7 @@
 .theme-wrapper {
   height: 100%;
   width: 100%;
+  background-color: #f0ecea;
 }
 
 mat-sidenav-container {
@@ -25,10 +26,14 @@ mat-sidenav-container {
     }
 
     .branding {
-      cursor: pointer;
       overflow: hidden;
       padding-top: 4px;
       text-overflow: ellipsis;
+      font-family: monospace;
+      font-style: italic;
+      font-weight: bolder;
+      font-size: xx-large;
+      padding-left: 20px;
 
       &.center {
         text-align: center;

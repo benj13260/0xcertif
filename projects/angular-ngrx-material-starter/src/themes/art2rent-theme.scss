@@ -1,0 +1,126 @@
+@use '~@angular/material' as mat;
+
+$cert-art-dark: #220f09;
+$cert-art-light: #f0ecea;
+
+$dark-primary-text: rgba(black, 0.87);
+$light-primary-text: white;
+
+$mat-art2rent: (
+  50: white,
+  100: #d7ccc8,
+  200: #bcaaa4,
+  300: #f0ecea,
+  400: #8d6e63,
+  500: #795548,
+  600: #6d4c41,
+  700: #220f09,
+  800: #4e342e,
+  900: #220f09,
+  A100: #d7ccc8,
+  A200: #bcaaa4,
+  A400: #8d6e63,
+  A700: #5d4037,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $light-primary-text,
+    400: $light-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $dark-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text
+  )
+);
+
+$mat-lime-art2rent: (
+  50: #f9fbe7,
+  100: #f0f4c3,
+  200: #e6ee9c,
+  300: antiquewhite,
+  400: #d4e157,
+  500: #cddc39,
+  600: #c0ca33,
+  700: #afb42b,
+  800: #9e9d24,
+  900: #827717,
+  A100: #f4ff81,
+  A200: #eeff41,
+  A400: #c6ff00,
+  A700: #aeea00,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $dark-primary-text,
+    500: $dark-primary-text,
+    600: $dark-primary-text,
+    700: $dark-primary-text,
+    800: $dark-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $dark-primary-text,
+    A400: $dark-primary-text,
+    A700: $dark-primary-text
+  )
+);
+
+$mat-red: (
+  50: #f9e0e0,
+  100: #f0b3b3,
+  200: #e68080,
+  300: #db4d4d,
+  400: #d42626,
+  500: #cc0000,
+  600: #c70000,
+  700: #c00000,
+  800: #b90000,
+  900: #ad0000,
+  A100: #ffd7d7,
+  A200: #ffa4a4,
+  A400: #ff7171,
+  A700: #ff5858,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #ffffff,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000
+  )
+);
+
+$sdt-art2rent-primary: mat.define-palette($mat-art2rent, 700, 300, 900);
+$sdt-art2rent-accent: mat.define-palette($mat-lime-art2rent, 300);
+$sdt-art2rent-warn: mat.define-palette($mat-red, 200);
+
+$sdt-art2rent-theme: mat.define-light-theme(
+  $sdt-art2rent-primary,
+  $sdt-art2rent-accent,
+  $sdt-art2rent-warn
+);
+
+$my-custom-typography: mat.define-typography-level(
+  $font-family: 'league-gothic,sans-serif;',
+  $font-weight: 800,
+  $font-size: 1rem,
+  $line-height: 1,
+  $letter-spacing: normal
+);
+
+@include mat.core($my-custom-typography);

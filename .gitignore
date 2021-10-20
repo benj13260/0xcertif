@@ -30,6 +30,7 @@ yarn.lock
 /documentation
 
 # misc
+/.firebase
 /.sass-cache
 /connect.lock
 /coverage
@@ -54,3 +55,5 @@ debug.log
 
 # Properties
 projects/angular-ngrx-material-starter/src/app/app.properties.ts
+projects/angular-ngrx-material-starter/src/environments/firebase-config.ts
+.firebaserc

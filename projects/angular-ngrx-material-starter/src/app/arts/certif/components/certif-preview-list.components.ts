@@ -6,6 +6,7 @@ import {
   Input,
   NgZone
 } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { interval, Observable } from 'rxjs';
 import { debounce } from 'rxjs/operators';
@@ -24,7 +25,6 @@ import { RootCertifsState, selectAll, selectLoaded } from '../certif.reducer';
       ></x-certif-preview>
     </div>
     <mat-divider></mat-divider>
-    <span>Hey {{ updated$ | async }}</span>
   `,
   styles: [
     `
@@ -32,6 +32,7 @@ import { RootCertifsState, selectAll, selectLoaded } from '../certif.reducer';
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
+        background-color: #f0ecea;
       }
     `
   ],
@@ -39,23 +40,25 @@ import { RootCertifsState, selectAll, selectLoaded } from '../certif.reducer';
 })
 export class CertifPreviewListComponent {
   certifs$: Observable<Certif[]>;
-  updated$: Observable<number>;
 
   scrollingSubscription: any;
   startIndex = 1;
   GAP = 10;
-  //numberOfTicks = 0;
+
+  address: string;
 
   constructor(
     private store: Store<RootCertifsState>,
+    route: ActivatedRoute,
     public scroll: ScrollDispatcher,
     private el: ElementRef,
     private ngZone: NgZone
   ) {
     this.certifs$ = store.select(selectAll);
-    this.updated$ = store.select(selectLoaded);
 
-    this.updated$.subscribe((c) => console.log('hello: ' + c));
+    route.params.subscribe((param) => {
+      console.log('param ' + JSON.stringify(param));
+    });
 
     this.scrollingSubscription = this.scroll
       .scrolled()
@@ -78,13 +81,13 @@ export class CertifPreviewListComponent {
     this.getItems();
   }
 
-  getItems() {
+  getItems(addr: string = '') {
     for (
       let index = this.startIndex;
       index < this.startIndex + this.GAP;
       index++
     ) {
-      this.store.dispatch(searchCertif({ addr: 'addr', id: '' + index }));
+      this.store.dispatch(searchCertif({ addr: this.address, id: '' + index }));
     }
     this.startIndex += this.GAP;
   }

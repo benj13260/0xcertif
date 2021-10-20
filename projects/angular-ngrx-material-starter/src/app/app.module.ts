@@ -8,12 +8,20 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app/app.component';
 import { CustomFmtModule } from './core/ethers/custom-format.module';
 
+import { AngularFireModule } from '@angular/fire/compat';
+import { firebaseConfig } from '../environments/firebase-config';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { CertifsModule } from './arts/certif/certifs.module';
+
 @NgModule({
   imports: [
     // angular
     BrowserAnimationsModule,
     BrowserModule,
 
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFirestoreModule,
+    CertifsModule,
     // core
     CoreModule,
     CustomFmtModule,

@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { ethers } from 'ethers';
+
 import AccountInfoC, { AccountInfo } from '../auth/auth.models';
 
 declare const window: any;
 const provider = new ethers.providers.Web3Provider(window.ethereum);
-let signer;
+let signer: ethers.providers.JsonRpcSigner;
 
 @Injectable({
   providedIn: 'root'
@@ -42,6 +43,10 @@ export class ProviderServices {
         accountInfo.chainName = 'Unknown';
         break;
     }
+    /*
+    let s = await signer.signMessage("Hello");
+    console.log(JSON.stringify(s));
+*/
     console.log(JSON.stringify(accountInfo));
     return accountInfo.address !== null ? accountInfo : null;
   }
