@@ -29,8 +29,10 @@ export const adapter: EntityAdapter<Certif> = createEntityAdapter<Certif>({
   sortComparer: false
 });
 
+export const certifFeatureKey = 'certifs';
+
 export interface RootCertifsState {
-  c: CertifsState;
+  certifs: CertifsState;
 }
 
 export interface CertifsState {
@@ -96,7 +98,7 @@ export const reducer = createReducer(
   }))
 );
 
-export function CertifReducers(
+export function certifReducers(
   state: CertifsState | undefined,
   action: Action
 ) {
@@ -106,22 +108,24 @@ export function CertifReducers(
 /**
  *  Selectors
  */
-export const getIds = (state: RootCertifsState) => state.c.search.ids;
+export const getIds = (state: CertifsState) => state.search.ids;
 
-export const getQuery = (state: RootCertifsState) => state.c.search.query;
+export const getQuery = (state: CertifsState) => state.search.query;
 
-export const getLoading = (state: RootCertifsState) => state.c.search.loading;
+export const getLoading = (state: CertifsState) => state.search.loading;
 
-export const getError = (state: RootCertifsState) => state.c.search.error;
+export const getError = (state: CertifsState) => state.search.error;
 
-export const selectId = (state: RootCertifsState) => state.c.selectedCertifId;
+export const selectId = (state: CertifsState) => state.selectedCertifId;
 
-export const selectCertifIds = (state: RootCertifsState) => state.c.certifs.ids;
+export const selectCertifIds = (state: RootCertifsState) =>
+  state.certifs.certifs.ids;
 
-export const selectCertifsEntity = (state: RootCertifsState) =>
-  state.c.certifs.entities;
+export const selectCertifsEntity = (state: RootCertifsState) => {
+  return state.certifs.certifs.entities;
+};
 
-export const selectLoaded = (state: RootCertifsState) => state.c.loaded;
+export const selectLoaded = (state) => state.loaded;
 
 export const selectAll = createSelector(
   selectCertifsEntity,

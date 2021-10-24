@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CertifCreateComponent } from './certif-create/components/certif-create.component';
 import { CertifPreviewListComponent } from './components/certif-preview-list.components';
 import { GalleryPreviewListComponent } from './components/gallery-preview-list.components';
 
@@ -9,7 +10,7 @@ export const routes: Routes = [
   {
     path: 'nft/:id',
     component: ViewCertifPageComponent,
-    data: { title: 'Certif details' }
+    data: { title: 'NFT Certificate details' }
   },
   {
     path: 'list',
@@ -17,9 +18,14 @@ export const routes: Routes = [
     data: { title: 'Galleries' }
   },
   {
+    path: 'create',
+    component: CertifCreateComponent,
+    data: { title: 'Create NFT' }
+  },
+  {
     path: '',
     component: CertifPreviewListComponent,
-    data: { title: 'Certifs' }
+    data: { title: 'NFT Certificates' }
   }
 ];
 

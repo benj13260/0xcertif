@@ -1,0 +1,52 @@
+.main-heading {
+  text-transform: uppercase;
+  margin: 0 0 20px 0;
+}
+.row {
+  margin-top: 20px;
+}
+
+.select {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.sub-select {
+  max-width: 28%;
+  margin-inline: auto;
+  margin: 10px;
+}
+
+.subtitle {
+  margin: 1px;
+}
+
+mat-card {
+  margin: 0 0 20px 0;
+  display: flex;
+
+  mat-card-header {
+    flex: 1 0 auto;
+  }
+}
+
+form {
+  margin: 20px 0;
+
+  mat-form-field {
+    width: 100%;
+  }
+
+  .div-button {
+    display: flex;
+    justify-content: center;
+  }
+  .btn-action {
+    margin: 10px 20px;
+  }
+  #remove {
+    display: flex;
+    margin: 0px 0px 0 10px;
+  }
+}

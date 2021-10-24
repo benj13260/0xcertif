@@ -1,18 +1,5 @@
-import { CdkScrollable, ScrollDispatcher } from '@angular/cdk/scrolling';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  Input,
-  NgZone
-} from '@angular/core';
-import { Store } from '@ngrx/store';
-import { interval, Observable } from 'rxjs';
-import { debounce } from 'rxjs/operators';
-import { Observer } from 'zen-observable-ts';
-import { Certif, Galleries, galleriesMock, Gallery } from '../certif';
-import { searchCertif } from '../certif.actions';
-import { RootCertifsState, selectAll, selectLoaded } from '../certif.reducer';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { galleriesMock, Gallery } from '../certif';
 
 @Component({
   selector: 'x-gallery-preview-list',

@@ -18,12 +18,14 @@ import { stakeDaoReducer } from './stake-dao/stake-dao.reducer';
 import { SettingsState } from './settings/settings.model';
 import { StakeDaoState } from './stake-dao/stake-dao.types';
 import { bookReducers, BooksState } from '../arts/books/reducers';
+import { certifReducers, CertifsState } from '../arts/certif/certif.reducer';
 
 export interface AppState {
   auth: AuthState;
   settings: SettingsState;
   stakeDao: StakeDaoState;
   books: BooksState;
+  certifs: CertifsState;
   router: RouterReducerState<RouterStateUrl>;
 }
 
@@ -32,7 +34,8 @@ export const reducers: ActionReducerMap<AppState> = {
   settings: settingsReducer,
   stakeDao: stakeDaoReducer,
   books: bookReducers,
-  router: routerReducer
+  router: routerReducer,
+  certifs: certifReducers
 };
 
 export const metaReducers: MetaReducer<AppState>[] = [
@@ -68,3 +71,8 @@ export const selectBooksState = createFeatureSelector<
   AppState,
   RouterReducerState<RouterStateUrl>
 >('books');
+
+export const selectCertifsState = createFeatureSelector<
+  AppState,
+  RouterReducerState<RouterStateUrl>
+>('certifs');

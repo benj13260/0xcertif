@@ -13,7 +13,12 @@ import { debounce } from 'rxjs/operators';
 import { Observer } from 'zen-observable-ts';
 import { Certif } from '../certif';
 import { searchCertif } from '../certif.actions';
-import { RootCertifsState, selectAll, selectLoaded } from '../certif.reducer';
+import {
+  CertifsState,
+  RootCertifsState,
+  selectAll,
+  selectLoaded
+} from '../certif.reducer';
 
 @Component({
   selector: 'x-certif-preview-list',

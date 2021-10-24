@@ -16,8 +16,9 @@ export interface Certif {
     nft?: Nft;
     title?: string;
     subtitle?: string;
-    authors?: string[];
+    artists?: string[];
     publisher?: string;
+    galleries?: string[];
     publishDate?: string;
     description?: string;
     height?: number;
@@ -48,6 +49,14 @@ export interface Gallery {
   };
 }
 
+export interface CertifUI {
+  id: string;
+  title: string;
+  artists: string[];
+  galleries: string[];
+  image: string;
+}
+
 export interface Galleries {
   galleries: Gallery[];
 }
@@ -58,7 +67,7 @@ export function generateMockCertif(): Certif {
     volumeInfo: {
       title: 'title',
       subtitle: 'subtitle',
-      authors: ['author'],
+      artists: [],
       publisher: 'publisher',
       publishDate: '',
       description: 'description',
@@ -82,6 +91,16 @@ export function nftToCertif(id: string, nft: Nft): Certif {
         full: nft.image.replace('ipfs://', 'https://ipfs.io/ipfs/')
       }
     }
+  };
+}
+
+export function generateMockCertifUi(): CertifUI {
+  return {
+    id: '',
+    title: '',
+    artists: [],
+    galleries: [],
+    image: ''
   };
 }
 

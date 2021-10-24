@@ -18,14 +18,19 @@ const routes: Routes = [
       import('./stake-dao/stake-dao.module').then((m) => m.StakeDaoModule)
   },
   {
-    path: 'nfts',
-    loadChildren: () =>
-      import('./arts/certif/certifs.module').then((m) => m.CertifsModule)
+    path: 'nfts'
+    //    loadChildren: () =>
+    //     import('./arts/certif/certifs.module').then((m) => m.CertifsModule)
   },
   {
-    path: 'galleries',
-    loadChildren: () =>
-      import('./arts/certif/certifs.module').then((m) => m.CertifsModule)
+    path: 'galleries'
+    //    loadChildren: () =>
+    //      import('./arts/certif/certifs.module').then((m) => m.CertifsModule)
+  },
+  {
+    path: 'create'
+    //    loadChildren: () =>
+    //      import('./arts/certif/certifs.module').then((m) => m.CertifsModule)
   },
   {
     path: 'books',

@@ -66,7 +66,8 @@ import {
   faPowerOff,
   faUserCircle,
   faPlayCircle,
-  faFileAlt
+  faFileAlt,
+  faTimes
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faGithub,
@@ -83,6 +84,7 @@ import { bitQueryUrl, headersGQL } from './stake-dao/stake-dao-graph.services';
 import { InMemoryCache } from '@apollo/client/cache';
 import { ApolloLink } from '@apollo/client/core';
 import { CustomFmtModule } from './ethers/custom-format.module';
+import { CertifEffects } from '../arts/certif/certif.effects';
 
 export {
   TitleService,
@@ -137,7 +139,8 @@ export function httpLoaderFactory(http: HttpClient) {
       AuthEffects,
       SettingsEffects,
       GoogleAnalyticsEffects,
-      StakeDaoEffects
+      StakeDaoEffects,
+      CertifEffects
     ]),
     environment.production
       ? []
@@ -218,6 +221,7 @@ export class CoreModule {
       faRocket,
       faPowerOff,
       faUserCircle,
+      faTimes,
       faPlayCircle,
       faGithub,
       faMediumM,
