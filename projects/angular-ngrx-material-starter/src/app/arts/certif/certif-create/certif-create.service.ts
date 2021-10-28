@@ -86,9 +86,13 @@ export class CertifCreateService {
     let c = generateMockCertif();
     c.id = certifUI.id;
     c.volumeInfo.title = certifUI.title;
+    c.volumeInfo.description = certifUI.desc;
     c.volumeInfo.galleries = certifUI.galleries;
     c.volumeInfo.artists = certifUI.artists;
     c.volumeInfo.imageLinks = { full: certifUI.image };
+    c.volumeInfo.height = certifUI.height;
+    c.volumeInfo.width = certifUI.width;
+    c.volumeInfo.depth = certifUI.depth;
     return c;
   }
 

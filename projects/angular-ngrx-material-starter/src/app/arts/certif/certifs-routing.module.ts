@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CertifCreateComponent } from './certif-create/components/certif-create.component';
-import { CertifPreviewListComponent } from './components/certif-preview-list.components';
-import { GalleryPreviewListComponent } from './components/gallery-preview-list.components';
+import { CertifPreviewListComponent } from './main/certif-preview-list.components';
+import { GalleryPreviewListComponent } from './main/gallery-preview-list.components';
 
-import { ViewCertifPageComponent } from './components/view-certif-page.component';
+import { ViewCertifPageComponent } from './main/view-certif-page.component';
 
 export const routes: Routes = [
   {
@@ -13,24 +13,31 @@ export const routes: Routes = [
     data: { title: 'NFT Certificate details' }
   },
   {
-    path: 'list',
+    path: 'galleries',
     component: GalleryPreviewListComponent,
     data: { title: 'Galleries' }
   },
+  /*
   {
-    path: 'create',
+    path: 'my-collection',
+    component: CertifCreateComponent,
+    data: { title: 'My NFT collection' }
+  },  
+  */
+  {
+    path: 'create-nft',
     component: CertifCreateComponent,
     data: { title: 'Create NFT' }
   },
   {
-    path: '',
+    path: 'nfts',
     component: CertifPreviewListComponent,
     data: { title: 'NFT Certificates' }
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class CertifsRoutingModule {}

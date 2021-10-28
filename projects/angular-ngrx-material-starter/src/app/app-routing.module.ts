@@ -8,15 +8,11 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'about',
-    loadChildren: () =>
-      import('./features/about/about.module').then((m) => m.AboutModule)
-  },
-  {
     path: 'stake-dao',
     loadChildren: () =>
       import('./stake-dao/stake-dao.module').then((m) => m.StakeDaoModule)
   },
+  /*
   {
     path: 'nfts'
     //    loadChildren: () =>
@@ -32,38 +28,16 @@ const routes: Routes = [
     //    loadChildren: () =>
     //      import('./arts/certif/certifs.module').then((m) => m.CertifsModule)
   },
+  */
   {
     path: 'books',
     loadChildren: () =>
       import('./arts/books/books.module').then((m) => m.BooksModule)
   },
 
-  /*
-  {
-    path: 'feature-list',
-    loadChildren: () =>
-      import('./features/feature-list/feature-list.module').then(
-        (m) => m.FeatureListModule
-      )
-  },
-  {
-    path: 'settings',
-    loadChildren: () =>
-      import('./features/settings/settings.module').then(
-        (m) => m.SettingsModule
-      )
-  },
-  {
-    path: 'examples',
-    loadChildren: () =>
-      import('./features/examples/examples.module').then(
-        (m) => m.ExamplesModule
-      )
-  },
-  */
   {
     path: '**',
-    redirectTo: 'about'
+    redirectTo: 'nfts'
   }
 ];
 
@@ -71,8 +45,8 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes, {
       scrollPositionRestoration: 'enabled',
-      preloadingStrategy: PreloadAllModules,
-      relativeLinkResolution: 'legacy'
+      preloadingStrategy: PreloadAllModules
+      // relativeLinkResolution: 'legacy'
     })
   ],
   exports: [RouterModule]

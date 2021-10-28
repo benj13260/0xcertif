@@ -23,7 +23,7 @@ export interface Certif {
     description?: string;
     height?: number;
     width?: number;
-    deep?: number;
+    depth?: number;
     imageLinks?: {
       thumbnail?: string;
       full: string;
@@ -52,9 +52,13 @@ export interface Gallery {
 export interface CertifUI {
   id: string;
   title: string;
+  desc: string;
   artists: string[];
   galleries: string[];
   image: string;
+  height: number;
+  width: number;
+  depth: number;
 }
 
 export interface Galleries {
@@ -71,9 +75,9 @@ export function generateMockCertif(): Certif {
       publisher: 'publisher',
       publishDate: '',
       description: 'description',
-      height: 0,
-      width: 0,
-      deep: 0,
+      height: null,
+      width: null,
+      depth: null,
       imageLinks: {
         thumbnail: 'string',
         full: 'string'
@@ -98,9 +102,13 @@ export function generateMockCertifUi(): CertifUI {
   return {
     id: '',
     title: '',
+    desc: '',
     artists: [],
     galleries: [],
-    image: ''
+    image: '',
+    height: null,
+    width: null,
+    depth: null
   };
 }
 

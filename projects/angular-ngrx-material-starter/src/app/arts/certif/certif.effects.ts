@@ -1,8 +1,19 @@
+import { HttpEvent, HttpEventType } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { map, mergeMap } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { catchError, map, mergeMap, takeUntil } from 'rxjs/operators';
 import { nftToCertif } from './certif';
-import { loadCertif, searchCertif } from './certif.actions';
+import {
+  emptyAction,
+  loadCertif,
+  searchCertif,
+  uploadCompletedAction,
+  uploadFailureAction,
+  uploadRequestAction,
+  uploadRequestActionLoad,
+  uploadRequestActionPre
+} from './certif.actions';
 import { CertifService } from './certif.services';
 
 @Injectable()
@@ -22,59 +33,53 @@ export class CertifEffects {
     )
   );
 
-  //
-
-  /*
-          mergeMap((p) => 
-            
-              this.nftService.retrieveCertif("1").pipe(
-                map(c => {
-                    console.log("c"+JSON.stringify(c));
-                    return reloadCertif();
-                  })
-              )
+  uploadRequestEffect$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(uploadRequestAction),
+      mergeMap((p) =>
+        this.nftService.uploadFile(p.file).pipe(
+          /*takeUntil(
+            this.actions$.pipe(
+              ofType(fromFileUploadActions.ActionTypes.UPLOAD_CANCEL)
+            )
+          ), */
+          map((event) => this.getActionFromHttpEvent(event)),
+          catchError((error) =>
+            of(uploadFailureAction({ error: JSON.stringify(error) }))
           )
-           
-           .pipe(
-            switchMap((c) => {
-              console.log("c"+JSON.stringify(c));
-  
-              return searchCertifSuccess({certifs : c})
-            })
-           )
-           */
-  //      )
-  // );
+        )
+      )
+    )
+  );
 
-  /*
+  private getActionFromHttpEvent(event: HttpEvent<any>) {
+    switch (event.type) {
+      case HttpEventType.Sent: {
+        return uploadRequestActionPre();
+      }
+      case HttpEventType.UploadProgress: {
+        return uploadRequestActionLoad({
+          perc: Math.round((100 * event.loaded) / event.total)
+        });
+      }
 
-          from(this.nftService.searchCertif(p.addr,0,10)).pipe(
-              map((res) =>   searchCertifSuccess({certifs : res})),
-              catchError((e) => {
-                  return of(searchCertifSuccess({ certifs: []}));
-              })
-          )
+      case HttpEventType.Response: {
+        if (event.status === 200) {
+          console.log(event.body.IpfsHash);
+          return uploadCompletedAction({
+            url: this.nftService.getPinataUrl(event.body.IpfsHash)
+          });
+        }
+        /*else {
+          return new fromFileUploadActions.UploadFailureAction({
+            error: event.statusText
+          });
+        } */
+      }
 
-
-              const nextSearch$ = this.actions$.pipe(
-                ofType(FindBookPageActions.searchBooks),
-                skip(1)
-              );
-  
-              return this.googleBooks.searchBooks(query).pipe(
-                takeUntil(nextSearch$),
-  
-                switchMap((books: Book[]) => [
-                  BooksApiActions.searchCleanupSuccess(),
-                  BooksApiActions.searchSuccess({ books })
-                ]),
-                catchError((err) =>
-                  of(BooksApiActions.searchFailure({ errorMsg: err.message }))
-                )
-              );
-            })
-          )
-          
-    );
-    */
+      default: {
+        return emptyAction();
+      }
+    }
+  }
 }

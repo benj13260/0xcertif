@@ -20,14 +20,14 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { CustomFmtModule } from '../../core/ethers/custom-format.module'; //../ethers/custom-format.module';
 import { CertifEffects } from './certif.effects';
-import { CertifPreviewListComponent } from './components/certif-preview-list.components';
-import { CertifPreviewComponent } from './components/certif-preview.components';
-import { ViewCertifPageComponent } from './components/view-certif-page.component';
-import { CertifDetailComponent } from './components/certif-detail.component';
+import { CertifPreviewListComponent } from './main/certif-preview-list.components';
+import { CertifPreviewComponent } from './main/certif-preview.components';
+import { ViewCertifPageComponent } from './main/view-certif-page.component';
+import { CertifDetailComponent } from './main/certif-detail.component';
 import { CertifsRoutingModule } from './certifs-routing.module';
 import { certifReducers, reducer } from './certif.reducer';
-import { GalleryPreviewComponent } from './components/gallery-preview.components';
-import { GalleryPreviewListComponent } from './components/gallery-preview-list.components';
+import { GalleryPreviewComponent } from './main/gallery-preview.components';
+import { GalleryPreviewListComponent } from './main/gallery-preview-list.components';
 import { CertifCreateComponent } from './certif-create/components/certif-create.component';
 import { CertifCreateService } from './certif-create/certif-create.service';
 import { CertifService } from './certif.services';
@@ -42,6 +42,7 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { CertifChipComponent } from './certif-create/components/form-components/certif-chip.component';
 import { CertifCreateImgComponent } from './certif-create/components/form-components/certif-create-img.component';
 import { MatSliderModule } from '@angular/material/slider';
+import { FileUploadComponent } from './certif-create/components/form-components/file-upload.component';
 
 export const COMPONENTS = [
   CertifPreviewComponent,
@@ -52,7 +53,8 @@ export const COMPONENTS = [
   GalleryPreviewListComponent,
   CertifCreateComponent,
   CertifChipComponent,
-  CertifCreateImgComponent
+  CertifCreateImgComponent,
+  FileUploadComponent
 ];
 
 @NgModule({

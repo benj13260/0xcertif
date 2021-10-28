@@ -8,6 +8,7 @@ import {
   createSelector,
   on
 } from '@ngrx/store';
+import { format } from 'path';
 import { updateDecorator } from 'typescript';
 import { Certif } from './certif';
 import {
@@ -16,7 +17,12 @@ import {
   removeAllCertif,
   searchCertif,
   searchCertifSuccess,
-  selectCertif
+  selectCertif,
+  displayImgAction,
+  uploadCompletedAction,
+  uploadRequestAction,
+  uploadRequestActionPre,
+  uploadRequestActionLoad
 } from './certif.actions';
 
 /**
@@ -45,6 +51,11 @@ export interface CertifsState {
   loaded: number;
   selectedCertifId: string;
   certifs: CertifEntityState;
+  form?: {
+    load?: boolean;
+    perc?: number;
+    img?: string;
+  };
 }
 
 const initialState: CertifsState = {
@@ -59,6 +70,11 @@ const initialState: CertifsState = {
   certifs: {
     ids: [],
     entities: {}
+  },
+  form: {
+    load: false,
+    perc: 0,
+    img: ''
   }
 };
 
@@ -95,6 +111,30 @@ export const reducer = createReducer(
   on(selectCertif, (state, { id }) => ({
     ...state,
     selectedCertifId: id
+  })),
+  on(uploadRequestActionPre, (state) => ({
+    ...state,
+    form: {
+      ...state.form,
+      load: true,
+      perc: 0,
+      img: ''
+    }
+  })),
+  on(uploadRequestActionLoad, (state, { perc }) => ({
+    ...state,
+    form: {
+      ...state.form,
+      perc: perc
+    }
+  })),
+  on(uploadCompletedAction, (state, { url }) => ({
+    ...state,
+    form: {
+      ...state.form,
+      load: false,
+      img: url
+    }
   }))
 );
 
@@ -126,6 +166,12 @@ export const selectCertifsEntity = (state: RootCertifsState) => {
 };
 
 export const selectLoaded = (state) => state.loaded;
+
+// Image
+export const selectFormLoad = (state: RootCertifsState) =>
+  state.certifs.form.load;
+export const selectFormImg = (state: RootCertifsState) =>
+  state.certifs.form.img;
 
 export const selectAll = createSelector(
   selectCertifsEntity,

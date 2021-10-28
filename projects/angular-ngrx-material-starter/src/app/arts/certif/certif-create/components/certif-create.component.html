@@ -12,31 +12,52 @@
           </div>
           <mat-divider></mat-divider>
           <div class="select">
-            <div class="sub-select">
+            <div class="sub-select-one-six">
               <mat-form-field>
-                <input
-                  matInput
-                  placeholder="title"
-                  formControlName="title"
-                />
-                <mat-error *ngIf="certifForm.get('title').hasError('minlength')">
-                  Min length
-                </mat-error>
-                <mat-error *ngIf="certifForm.get('title').hasError('required')">
-                  Required
-                </mat-error>
+                <input matInput placeholder="Title" formControlName="title"/>
+                <mat-error *ngIf="certifForm.get('title').hasError('minlength')">Min length</mat-error>
+                <mat-error *ngIf="certifForm.get('title').hasError('required')">Required</mat-error>
               </mat-form-field>
             </div>
-            <div class="sub-select">
+          </div>
+          <div class="select">
+            <div class="sub-select-one-eight">
+              <mat-form-field>
+                <input matInput placeholder="Description" formControlName="desc"/>
+              </mat-form-field>
+            </div>
+          </div>          
+          <div class="select">
+            <div class="sub-select-two">
               <x-certif-chip *ngIf="!isEdit.value" title="Artists" [fullItems]="allArtists" (selectEvent)="updateArtists($event)"></x-certif-chip>
               <x-certif-chip *ngIf="isEdit.value" title="Artists" [fullItems]="allArtists" [selectedItems]="editArtists" (selectEvent)="updateArtists($event)"></x-certif-chip>
             </div>
-            <div class="sub-select">
-              <x-certif-chip *ngIf="!isEdit.value" title="Gallery" [fullItems]="allGalleries" (selectEvent)="updateGalleries($event)"></x-certif-chip>
-              <x-certif-chip *ngIf="isEdit.value" title="Gallery" [fullItems]="allGalleries" [selectedItems]="editGalleries" (selectEvent)="updateGalleries($event)"></x-certif-chip>
+            <div class="sub-select-two">
+              <x-certif-chip *ngIf="!isEdit.value" title="Galleries" [fullItems]="allGalleries" (selectEvent)="updateGalleries($event)"></x-certif-chip>
+              <x-certif-chip *ngIf="isEdit.value" title="Galleries" [fullItems]="allGalleries" [selectedItems]="editGalleries" (selectEvent)="updateGalleries($event)"></x-certif-chip>
             </div>
           </div>
-          <x-certif-create-img [srcUrl]="certifForm.get('image').value" (selectEvent)="updateImage($event)"></x-certif-create-img>
+          <div class="select">
+            <div class="sub-select-three">
+              <mat-form-field>
+                <input type="number" matInput placeholder="Height" formControlName="height"/>
+                <mat-error *ngIf="certifForm.get('height').hasError('minlength')">Min length</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="sub-select-three">
+              <mat-form-field>
+                <input type="number" matInput placeholder="Width" formControlName="width"/>
+                <mat-error *ngIf="certifForm.get('width').hasError('minlength')">Min length</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="sub-select-three">
+              <mat-form-field>
+                <input type="number" matInput placeholder="Depth" formControlName="depth"/>
+              </mat-form-field>                            
+            </div>
+          </div>
+          <x-file-upload (selectImage)="updateImage($event)"></x-file-upload>
+          <!--x-certif-create-img [srcUrl]="certifForm.get('image').value" (selectEvent)="updateImage($event)"></x-certif-create-img-->
 
 
         </form>
@@ -60,8 +81,8 @@
               </mat-card-subtitle>
             </mat-card-header>
             <mat-card-actions>
-              <button mat-button (click)="editUser(certif)">Edit</button>
-              <button mat-button (click)="removeUser(certif.id)">Delete</button>
+              <button mat-button (click)="editCertif(certif)">Edit</button>
+              <button mat-button (click)="removeCertif(certif.id)">Delete</button>
             </mat-card-actions>
           </mat-card>
         </ng-container>

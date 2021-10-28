@@ -44,6 +44,7 @@ export class CertifCreateComponent implements OnInit {
   removable = true;
 
   imageNum: number = 1;
+  imageBuf: ArrayBuffer;
 
   filteredArtistsList: Observable<string[]>;
 
@@ -65,9 +66,13 @@ export class CertifCreateComponent implements OnInit {
     this.certifForm = this.fb.group({
       id: '',
       title: ['', [Validators.required, Validators.minLength(5)]],
+      desc: '', //['', [Validators.required]],
       artists: '',
       galleries: '',
-      image: ''
+      image: '',
+      height: ['', [Validators.required]],
+      width: ['', [Validators.required]],
+      depth: '' //['', [Validators.required]],
     });
 
     this.isEdit$ = this.certifForm.get('id').valueChanges.pipe(
@@ -76,11 +81,11 @@ export class CertifCreateComponent implements OnInit {
     );
   }
 
-  removeUser(id: string) {
+  removeCertif(id: string) {
     this.certifCreateService.removeCertif(id);
   }
 
-  editUser(certif: Certif) {
+  editCertif(certif: Certif) {
     let certifUI = this.certifCreateService.convertToUI(certif);
     console.log(certifUI);
     this.editArtists = certifUI.artists;
