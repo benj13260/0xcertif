@@ -10,8 +10,14 @@ import { CustomFmtModule } from './core/ethers/custom-format.module';
 
 import { AngularFireModule } from '@angular/fire/compat';
 import { firebaseConfig } from '../environments/firebase-config';
-import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import {
+  AngularFirestore,
+  AngularFirestoreModule
+} from '@angular/fire/compat/firestore';
 import { CertifsModule } from './arts/certif/certifs.module';
+import { environmentProp } from './app.properties';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 
 @NgModule({
   imports: [
@@ -19,7 +25,7 @@ import { CertifsModule } from './arts/certif/certifs.module';
     BrowserAnimationsModule,
     BrowserModule,
 
-    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireModule.initializeApp(environmentProp.firebaseConfig),
     AngularFirestoreModule,
     CertifsModule,
     // core

@@ -40,15 +40,19 @@ export class AppComponent implements OnInit {
   languages = ['en', 'fr'];
   navigation = [
     { link: 'nfts', label: 'Arts' },
-    { link: 'galleries', label: 'Galleries' },
+    { link: 'galleries', label: 'Galleries' }
     //{ link: 'my-collection', label: 'My Collection' },
-    { link: 'create-nft', label: 'Create NFT' }
     //{ link: 'books', label: 'Books' },
     //{ link: 'about', label: 'sdt.menu.about' }
     //{ link: 'stake-dao', label: 'sdt.menu.stake-dao' },
     //{ link: 'arts/coll', label: 'Art' }
     //{ link: 'feature-list', label: 'sdt.menu.features' },
   ];
+
+  navigationConnectedAdmin = [{ link: 'create-nft', label: 'Create NFT' }];
+
+  navigationConnectedUser = [{ link: 'my-collection', label: 'My Collection' }];
+
   navigationSideMenu = [
     ...this.navigation,
     { link: 'settings', label: 'sdt.menu.settings' }

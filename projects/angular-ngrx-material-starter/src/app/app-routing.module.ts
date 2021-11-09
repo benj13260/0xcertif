@@ -7,12 +7,13 @@ const routes: Routes = [
     redirectTo: 'nfts',
     pathMatch: 'full'
   },
+  /*
   {
     path: 'stake-dao',
     loadChildren: () =>
       import('./stake-dao/stake-dao.module').then((m) => m.StakeDaoModule)
   },
-  /*
+
   {
     path: 'nfts'
     //    loadChildren: () =>
@@ -28,13 +29,13 @@ const routes: Routes = [
     //    loadChildren: () =>
     //      import('./arts/certif/certifs.module').then((m) => m.CertifsModule)
   },
-  */
+  
   {
     path: 'books',
     loadChildren: () =>
       import('./arts/books/books.module').then((m) => m.BooksModule)
   },
-
+*/
   {
     path: '**',
     redirectTo: 'nfts'

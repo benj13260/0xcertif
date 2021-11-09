@@ -1,15 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CertifCreateComponent } from './certif-create/components/certif-create.component';
+import { CertifAdminGuard } from './guards/certifAdmin.guard';
+import { CertifDetailComponent } from './main/certif-detail.component';
 import { CertifPreviewListComponent } from './main/certif-preview-list.components';
 import { GalleryPreviewListComponent } from './main/gallery-preview-list.components';
 
-import { ViewCertifPageComponent } from './main/view-certif-page.component';
+export const createNftPath = 'create-nft';
 
 export const routes: Routes = [
   {
-    path: 'nft/:id',
-    component: ViewCertifPageComponent,
+    path: 'nfts/:id',
+    component: CertifDetailComponent,
     data: { title: 'NFT Certificate details' }
   },
   {
@@ -25,8 +27,9 @@ export const routes: Routes = [
   },  
   */
   {
-    path: 'create-nft',
+    path: createNftPath,
     component: CertifCreateComponent,
+    canActivate: [CertifAdminGuard],
     data: { title: 'Create NFT' }
   },
   {

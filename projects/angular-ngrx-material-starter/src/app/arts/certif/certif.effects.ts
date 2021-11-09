@@ -1,30 +1,40 @@
 import { HttpEvent, HttpEventType } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { of } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { from, of } from 'rxjs';
 import { catchError, map, mergeMap, takeUntil } from 'rxjs/operators';
 import { nftToCertif } from './certif';
 import {
   emptyAction,
+  getCertif,
+  getCertifs,
+  getCertifsSuccess,
   loadCertif,
-  searchCertif,
+  searchNFT,
   uploadCompletedAction,
   uploadFailureAction,
   uploadRequestAction,
   uploadRequestActionLoad,
   uploadRequestActionPre
 } from './certif.actions';
+import { selectSelectedCertif } from './certif.reducer';
 import { CertifService } from './certif.services';
 
 @Injectable()
 export class CertifEffects {
-  constructor(private actions$: Actions, private nftService: CertifService) {}
+  constructor(
+    private actions$: Actions,
+    private store: Store,
+    private certifService: CertifService
+  ) {}
 
-  searchCertif$ = createEffect(() =>
+  // NFT
+  searchNFT$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(searchCertif),
+      ofType(searchNFT),
       mergeMap((p) =>
-        this.nftService.retrieveCertif(p.id).pipe(
+        this.certifService.retrieveCertif(p.id).pipe(
           map((nft) => {
             return loadCertif({ certif: nftToCertif(p.id, nft) });
           })
@@ -33,11 +43,44 @@ export class CertifEffects {
     )
   );
 
+  getCertif$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(getCertif),
+      mergeMap((p) =>
+        this.store.select(selectSelectedCertif).pipe(
+          map((c) => {
+            console.log('getCertif$');
+            console.log(c);
+            if (c !== null) return loadCertif({ certif: c });
+            else {
+              from(this.certifService.getCertif(p.id)).pipe(
+                map((c) => {
+                  return loadCertif({ certif: c });
+                })
+              );
+            }
+          })
+        )
+      )
+    )
+  );
+
+  getCertifs$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(getCertifs),
+      mergeMap((p) =>
+        this.certifService
+          .getCertifs(p.id)
+          .pipe(map((r) => getCertifsSuccess({ certifs: r })))
+      )
+    )
+  );
+
   uploadRequestEffect$ = createEffect(() =>
     this.actions$.pipe(
       ofType(uploadRequestAction),
       mergeMap((p) =>
-        this.nftService.uploadFile(p.file).pipe(
+        this.certifService.uploadFile(p.file).pipe(
           /*takeUntil(
             this.actions$.pipe(
               ofType(fromFileUploadActions.ActionTypes.UPLOAD_CANCEL)
@@ -67,7 +110,7 @@ export class CertifEffects {
         if (event.status === 200) {
           console.log(event.body.IpfsHash);
           return uploadCompletedAction({
-            url: this.nftService.getPinataUrl(event.body.IpfsHash)
+            url: this.certifService.getPinataUrl(event.body.IpfsHash)
           });
         }
         /*else {

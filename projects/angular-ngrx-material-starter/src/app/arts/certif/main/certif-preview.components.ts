@@ -1,34 +1,38 @@
 import {
   animate,
-  query,
-  stagger,
   state,
   style,
   transition,
   trigger
 } from '@angular/animations';
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { randomInt } from 'crypto';
-import { BehaviorSubject, fromEvent, interval, of } from 'rxjs';
-import { debounce, delay, map } from 'rxjs/operators';
+import { BehaviorSubject, of } from 'rxjs';
+import { delay } from 'rxjs/operators';
 import { ROUTE_ANIMATIONS_ELEMENTS } from '../../../core/core.module';
-
 import { Certif } from '../certif';
 
 @Component({
   selector: 'x-certif-preview',
   template: `
     <a
-      [routerLink]="['/arts/art', certif.id]"
+      *ngIf="certif.volumeInfo != null"
+      [routerLink]="['/nfts', certif.id]"
       [@openClose]="OpenEmitter$ | async"
     >
       <mat-card class="example-card">
-        <img mat-card-image src="{{ certif.volumeInfo.imageLinks.full }}" />
+        <div class="img">
+          <img mat-card-image src="{{ certif.volumeInfo?.imageLinks?.full }}" />
+        </div>
         <mat-card-content>
           <p>
-            <span><i>Kolly Gallery</i></span>
-            <span><b>Mist</b> - El diablo</span>
-            <span class="right">100'000 $</span>
+            <span
+              ><i>{{ certif.volumeInfo?.galleries[0] }}</i></span
+            >
+            <span
+              ><b>{{ certif.volumeInfo?.artists[0] }}</b></span
+            >
+            <span>{{ certif.volumeInfo?.title }}</span>
+            <span class="right">$</span>
           </p>
         </mat-card-content>
         <mat-card-actions>
@@ -64,9 +68,9 @@ import { Certif } from '../certif';
       }
 
       mat-card-actions {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
+        position: absolute;
+        bottom: 25px;
+        left: 30%;
       }
 
       mat-card {
@@ -75,7 +79,7 @@ import { Certif } from '../certif';
       }
 
       mat-card-content {
-        margin-bottom: 5px;
+        margin-bottom: 50px;
       }
 
       a {
@@ -92,6 +96,12 @@ import { Certif } from '../certif';
       }
       .right {
         margin-left: auto;
+        position: relative;
+        bottom: 22px;
+      }
+
+      .img {
+        min-height: 80%;
       }
     `
   ],

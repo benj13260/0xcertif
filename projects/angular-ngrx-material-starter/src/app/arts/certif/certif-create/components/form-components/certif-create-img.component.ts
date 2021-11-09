@@ -1,26 +1,13 @@
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import {
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
   EventEmitter,
   Input,
-  NgZone,
   OnChanges,
   OnInit,
-  Output,
-  ViewChild
+  Output
 } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { MatChipInputEvent } from '@angular/material/chips';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
-import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { ROUTE_ANIMATIONS_ELEMENTS } from '../../../../../core/animations/route.animations';
-import { FindBookPageActions } from '../../../../books/actions';
-import { CertifCreateService } from '../../certif-create.service';
 
 @Component({
   selector: 'x-certif-create-img',

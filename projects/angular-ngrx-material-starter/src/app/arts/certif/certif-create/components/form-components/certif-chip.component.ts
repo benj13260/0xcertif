@@ -95,20 +95,24 @@ export class CertifChipComponent {
   constructor(
     private fb: FormBuilder,
     private certifCreateService: CertifCreateService
-  ) {
-    this.filteredItems = this.formCtrl.valueChanges.pipe(
-      map((item: string | null) =>
-        item ? this._filter(item) : this.allItems.slice()
-      )
-    );
-  }
+  ) {}
 
   ngOnInit() {
     this.formCtrl.setValue(null);
   }
 
   ngOnChanges() {
-    console.log('ngOnChanges');
+    console.log(JSON.stringify(this.fullItems));
+    if (this.fullItems == null) {
+      this.formCtrl.setValue(null);
+      this.items = [];
+      return;
+    }
+    this.filteredItems = this.formCtrl.valueChanges.pipe(
+      map((item: string | null) =>
+        item ? this._filter(item) : this.allItems.slice()
+      )
+    );
     // Clean up state
     this.formCtrl.setValue(null);
     this.allItems = [...this.fullItems];

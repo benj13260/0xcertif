@@ -1,25 +1,15 @@
-import { HttpClient, HttpEventType } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import {
   ApplicationRef,
-  ChangeDetectionStrategy,
   Component,
   EventEmitter,
-  Input,
   NgZone,
-  OnChanges,
   OnInit,
-  Output,
-  SimpleChanges
+  Output
 } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { from, Observable, of, Subject, Subscription } from 'rxjs';
-import { finalize, tap } from 'rxjs/operators';
-import { environmentProp } from '../../../../../app.properties';
-import {
-  displayImgAction,
-  uploadRequestAction,
-  uploadRequestActionPre
-} from '../../../certif.actions';
+import { Observable } from 'rxjs';
+import { uploadRequestAction } from '../../../certif.actions';
 import { selectFormImg, selectFormLoad } from '../../../certif.reducer';
 
 @Component({
@@ -69,7 +59,7 @@ import { selectFormImg, selectFormLoad } from '../../../certif.reducer';
   ]
 })
 export class FileUploadComponent implements OnInit {
-  @Output() selectImage = new EventEmitter<File>();
+  @Output() selectImage = new EventEmitter<string>();
 
   requiredFileType: string = 'image/png, image/gif, image/jpeg';
   fileName = '';
@@ -88,6 +78,7 @@ export class FileUploadComponent implements OnInit {
     this.load$ = this.store.select(selectFormLoad);
     this.url$ = this.store.select(selectFormImg);
     this.url$.subscribe((e) => {
+      this.selectImage.emit(e);
       console.log('image ' + e);
       this.url = e;
     });

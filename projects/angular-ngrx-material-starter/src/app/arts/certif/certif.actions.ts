@@ -12,14 +12,29 @@ export const selectCertif = createAction(
   props<{ id: string }>()
 );
 
+export const getCertif = createAction(
+  '[View Certif Page Certif] Get Certif',
+  props<{ id: string }>()
+);
+
+export const getCertifs = createAction(
+  '[View Certif List Certifs] Get Certifs',
+  props<{ id: string }>()
+);
+
+export const getCertifsSuccess = createAction(
+  '[View Certif List Certifs Success] Get Certifs Success',
+  props<{ certifs: Certif[] }>()
+);
+
 export const reloadCertif = createAction('[Reload Certif Page] Reload Certif');
 
-export const searchCertif = createAction(
+export const searchNFT = createAction(
   '[Search Certif Page] Search Certif',
   props<{ addr: string; id: string }>()
 );
 
-export const searchCertifSuccess = createAction(
+export const searchNFTSuccess = createAction(
   '[Search Certif Success] Search Certif Success',
   props<{ certifs: Certif[] }>()
 );
@@ -29,6 +44,11 @@ export const removeAllCertif = createAction(
 );
 
 // Upload File Actions
+
+export const uploadRequestActionInit = createAction(
+  '[Upload Image Init] Upload request Init'
+);
+
 export const uploadRequestActionPre = createAction(
   '[Upload Image Pre] Upload request Pre'
 );

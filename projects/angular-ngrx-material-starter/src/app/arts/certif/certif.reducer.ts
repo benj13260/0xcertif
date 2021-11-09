@@ -15,14 +15,15 @@ import {
   reloadCertif,
   loadCertif,
   removeAllCertif,
-  searchCertif,
-  searchCertifSuccess,
   selectCertif,
   displayImgAction,
   uploadCompletedAction,
   uploadRequestAction,
   uploadRequestActionPre,
-  uploadRequestActionLoad
+  uploadRequestActionLoad,
+  uploadRequestActionInit,
+  searchNFTSuccess,
+  getCertifsSuccess
 } from './certif.actions';
 
 /**
@@ -100,7 +101,11 @@ export const reducer = createReducer(
     loaded: state.loaded + 1,
     certifs: adapter.addOne(certif, state.certifs)
   })),
-  on(searchCertifSuccess, (state, { certifs }) => ({
+  on(searchNFTSuccess, (state, { certifs }) => ({
+    ...state,
+    certifs: adapter.addMany(certifs, state.certifs)
+  })),
+  on(getCertifsSuccess, (state, { certifs }) => ({
     ...state,
     certifs: adapter.addMany(certifs, state.certifs)
   })),
@@ -111,6 +116,14 @@ export const reducer = createReducer(
   on(selectCertif, (state, { id }) => ({
     ...state,
     selectedCertifId: id
+  })),
+  on(uploadRequestActionInit, (state) => ({
+    ...state,
+    form: {
+      ...state.form,
+      perc: 0,
+      img: ''
+    }
   })),
   on(uploadRequestActionPre, (state) => ({
     ...state,
@@ -161,6 +174,9 @@ export const selectId = (state: CertifsState) => state.selectedCertifId;
 export const selectCertifIds = (state: RootCertifsState) =>
   state.certifs.certifs.ids;
 
+export const selectCertifId = (state: RootCertifsState) =>
+  state.certifs.selectedCertifId;
+
 export const selectCertifsEntity = (state: RootCertifsState) => {
   return state.certifs.certifs.entities;
 };
@@ -192,4 +208,12 @@ export const selectCertifsState =
 export const selectCertifEntitiesState = createSelector(
   selectCertifsState,
   (state) => state.certifs
+);
+
+export const selectSelectedCertif = createSelector(
+  selectCertifsEntity,
+  selectCertifId,
+  (entities, selectedId) => {
+    return selectedId && entities[selectedId];
+  }
 );

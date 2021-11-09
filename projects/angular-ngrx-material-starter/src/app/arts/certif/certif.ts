@@ -20,7 +20,7 @@ export interface Certif {
     publisher?: string;
     galleries?: string[];
     publishDate?: string;
-    description?: string;
+    desc?: string;
     height?: number;
     width?: number;
     depth?: number;
@@ -49,6 +49,11 @@ export interface Gallery {
   };
 }
 
+export interface Artist {
+  id: string;
+  name: string;
+}
+
 export interface CertifUI {
   id: string;
   title: string;
@@ -74,13 +79,13 @@ export function generateMockCertif(): Certif {
       artists: [],
       publisher: 'publisher',
       publishDate: '',
-      description: 'description',
+      desc: 'desc',
       height: null,
       width: null,
       depth: null,
       imageLinks: {
-        thumbnail: 'string',
-        full: 'string'
+        thumbnail: '',
+        full: ''
       }
     }
   };
@@ -95,6 +100,17 @@ export function nftToCertif(id: string, nft: Nft): Certif {
         full: nft.image.replace('ipfs://', 'https://ipfs.io/ipfs/')
       }
     }
+  };
+}
+
+export function addAttribute(n: Nft, key: string, val: string) {
+  n.attributes.push({ trait_type: key, value: val });
+}
+
+export function generateNft(): Nft {
+  return {
+    image: '',
+    attributes: []
   };
 }
 
@@ -137,8 +153,8 @@ export function galleriesMock(): Galleries {
               'https://www.kollygallery.ch/wp-content/uploads/2019/02/Kolly-gallery_header.jpg'
           }
         }
-      },
-      {
+      }
+      /*     {
         id: '2',
         volumeInfo: {
           contractAddr: '123',
@@ -184,6 +200,7 @@ export function galleriesMock(): Galleries {
           }
         }
       }
+*/
     ]
   };
 }

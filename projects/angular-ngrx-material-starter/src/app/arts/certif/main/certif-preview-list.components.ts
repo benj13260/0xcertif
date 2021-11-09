@@ -1,24 +1,16 @@
-import { CdkScrollable, ScrollDispatcher } from '@angular/cdk/scrolling';
+import { ScrollDispatcher } from '@angular/cdk/scrolling';
 import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
-  Input,
   NgZone
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { interval, Observable } from 'rxjs';
-import { debounce } from 'rxjs/operators';
-import { Observer } from 'zen-observable-ts';
+import { Observable } from 'rxjs';
 import { Certif } from '../certif';
-import { searchCertif } from '../certif.actions';
-import {
-  CertifsState,
-  RootCertifsState,
-  selectAll,
-  selectLoaded
-} from '../certif.reducer';
+import { getCertifs, searchNFT } from '../certif.actions';
+import { RootCertifsState, selectAll } from '../certif.reducer';
 
 @Component({
   selector: 'x-certif-preview-list',
@@ -60,39 +52,16 @@ export class CertifPreviewListComponent {
     private ngZone: NgZone
   ) {
     this.certifs$ = store.select(selectAll);
-
-    route.params.subscribe((param) => {
-      console.log('param ' + JSON.stringify(param));
-    });
-
-    this.scrollingSubscription = this.scroll
-      .scrolled()
-      .pipe(debounce((i) => interval(200)))
-      .subscribe((data: CdkScrollable) => {
-        console.log(data.measureScrollOffset('bottom'));
-        console.log(data.elementScrolled);
-        console.log(this.el.nativeElement.offsetHeight);
-
-        if (
-          data.measureScrollOffset('bottom') < 200
-          //&& this.searchQuery$ != null
-        ) {
-          this.ngZone.run(() => {
-            this.getItems();
-          });
-        }
-      });
-
-    this.getItems();
+    this.store.dispatch(getCertifs({ id: '0' }));
   }
 
-  getItems(addr: string = '') {
+  getNFT(addr: string = '') {
     for (
       let index = this.startIndex;
       index < this.startIndex + this.GAP;
       index++
     ) {
-      this.store.dispatch(searchCertif({ addr: this.address, id: '' + index }));
+      this.store.dispatch(searchNFT({ addr: this.address, id: '' + index }));
     }
     this.startIndex += this.GAP;
   }
