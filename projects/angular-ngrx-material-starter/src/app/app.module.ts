@@ -9,7 +9,6 @@ import { AppComponent } from './app/app.component';
 import { CustomFmtModule } from './core/ethers/custom-format.module';
 
 import { AngularFireModule } from '@angular/fire/compat';
-import { firebaseConfig } from '../environments/firebase-config';
 import {
   AngularFirestore,
   AngularFirestoreModule

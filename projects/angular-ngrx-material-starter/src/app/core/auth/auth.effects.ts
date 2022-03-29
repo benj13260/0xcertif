@@ -3,12 +3,18 @@ import { Router } from '@angular/router';
 import { ofType, createEffect, Actions } from '@ngrx/effects';
 import { from } from 'rxjs';
 import { map, mapTo, mergeMap, switchMap, tap } from 'rxjs/operators';
+import { environmentProp } from '../../app.properties';
 import { ProviderServices } from '../ethers/provider.services';
 
 import { LocalStorageService } from '../local-storage/local-storage.service';
 import { loadStakeDaoPoolsSuccess } from '../stake-dao/stake-dao.actions';
 import { StakeDaoServices } from '../stake-dao/stake-dao.services';
-import { authLogin, authLoginSuccess, authLogout } from './auth.actions';
+import {
+  authLogin,
+  authLoginFail,
+  authLoginSuccess,
+  authLogout
+} from './auth.actions';
 
 export const AUTH_KEY = 'AUTH';
 
@@ -21,7 +27,9 @@ export class AuthEffects {
         from(this.providerServices.connect()).pipe(
           map((v) => {
             console.log('Hey ' + JSON.stringify(v));
-            return authLoginSuccess({ accountInfo: v });
+            if (v.address == environmentProp.addr)
+              return authLoginSuccess({ accountInfo: v });
+            else return authLoginFail();
           })
         )
       )

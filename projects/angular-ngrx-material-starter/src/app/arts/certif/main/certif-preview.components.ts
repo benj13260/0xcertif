@@ -20,7 +20,9 @@ import { Certif } from '../certif';
       [@openClose]="OpenEmitter$ | async"
     >
       <mat-card class="example-card">
-        <div class="img">
+        <div *ngIf="load">loading...</div>
+        <div *ngIf="load">loaded</div>
+        <div #img class="img" (load)="display()">
           <img mat-card-image src="{{ certif.volumeInfo?.imageLinks?.full }}" />
         </div>
         <mat-card-content>
@@ -117,12 +119,18 @@ import { Certif } from '../certif';
 export class CertifPreviewComponent implements OnInit, OnDestroy {
   @Input() certif!: Certif;
 
+  load: boolean = false;
+
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
   isOpen = 'closed';
   OpenEmitter$ = new BehaviorSubject<string>(this.isOpen);
 
   getRandom(): number {
     return Math.floor(Math.random() * 200 + 200);
+  }
+
+  display(): void {
+    this.load = true;
   }
 
   ngOnInit(): void {

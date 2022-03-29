@@ -51,6 +51,7 @@ import { selectFormImg, selectFormLoad } from '../../../certif.reducer';
       .div-button {
         display: flex;
         justify-content: center;
+        margin-bottom: 10px;
       }
       mat-divider {
         margin: 10px;

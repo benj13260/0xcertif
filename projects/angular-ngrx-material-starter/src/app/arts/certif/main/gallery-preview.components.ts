@@ -33,6 +33,14 @@ import { Certif, Gallery } from '../certif';
             <mat-card-title>{{ title }}</mat-card-title>
             <mat-card-subtitle>{{ owner }}</mat-card-subtitle>
           </div>
+          <div class="address">
+            <div>
+              Address: <i>0x95ab81bc1532c8a696d89365f2e6f76a404fe4df</i>
+            </div>
+            <div>
+              Collection: <i>0x54cCbd37fc2d4a1cedC9Ee3ef3BDe315ECCd909c</i>
+            </div>
+          </div>
         </mat-card-header>
         <img mat-card-image [src]="imageCover" />
         <mat-card-content>
@@ -111,6 +119,11 @@ import { Certif, Gallery } from '../certif';
       }
       .right {
         margin-left: auto;
+      }
+      .address {
+        position: relative;
+        margin-left: auto;
+        margin-top: 10px;
       }
     `
   ],

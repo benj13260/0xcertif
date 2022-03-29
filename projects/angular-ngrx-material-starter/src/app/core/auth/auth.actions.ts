@@ -6,4 +6,7 @@ export const authLoginSuccess = createAction(
   '[Auth] Login Success',
   props<{ accountInfo: AccountInfo }>()
 );
+
+export const authLoginFail = createAction('[Auth] Login Fail');
+
 export const authLogout = createAction('[Auth] Logout');

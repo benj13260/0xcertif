@@ -64,6 +64,9 @@ export class StakeDaoServices {
         series: []
       }
     ];
+
+    return null;
+
     let r;
     r = await this.apollo
       .watchQuery<InOut>({
